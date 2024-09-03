@@ -1,0 +1,60 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ffffff; /* White background for the header */
+  /* border-bottom: 2px solid #ff9933; Saffron border */
+}
+
+.menu-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px; /* Adjust height as needed */
+  cursor: pointer;
+  margin-right: 20px; /* Space between menu button and logo */
+}
+
+.menu-line {
+  width: 30px; /* Adjust width as needed */
+  height: 4px; /* Adjust height as needed */
+  background-color: #ff9933; /* Saffron color for the lines */
+}
+
+.logo img {
+  height: 45px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.signin-button,
+.signup-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #ffffff; /* White background for the Sign Up button */
+  color: #ff9933; /* Saffron text color */
+  border: 2px solid #ff9933; /* Saffron border */
+}
+.signup-button {
+ margin-right: 50px;
+}
+
+.signin-button:hover, .signup-button:hover  {
+  background-color: #e68a00; /* Darker saffron for hover effect */
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+

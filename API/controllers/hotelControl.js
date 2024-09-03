@@ -52,3 +52,15 @@ export const getHotels = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getHotelByCity = async (req, res, next) => {
+  try {
+    const cityQuery = new RegExp(req.params.city, "i");
+
+    const hotelsByCity = await Hotels.find({ city: cityQuery });
+
+    res.status(200).json(hotelsByCity);
+  } catch (err) {
+    next(err);
+  }
+};

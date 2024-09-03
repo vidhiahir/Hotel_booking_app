@@ -4,6 +4,7 @@ import {
   createHotel,
   deleteHotel,
   getHotel,
+  getHotelByCity,
   getHotels,
   updateHotel,
 } from "../controllers/hotelControl.js";
@@ -22,7 +23,8 @@ router.delete("/:id", verifyAdmin, deleteHotel);
 
 //GET
 router.get("/:id", getHotel);
-
+//Get by city
+router.get("/city/:city", getHotelByCity);
 //GET ALL
 router.get("/", getHotels);
 
