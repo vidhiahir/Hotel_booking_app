@@ -2,18 +2,15 @@
 import React, { useState, useEffect } from "react";
 import "./HotelSearch.css";
 import "./HotelSearchMini";
+import { Link } from "react-router-dom";
 import HotelSearchMini from "./HotelSearchMini";
 
-const HotelSearch = ({ hotelSearchData, handleChange, handleClick, load }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission
-    handleClick(); // Call your existing handleClick function
-  };
+const HotelSearch = ({ hotelSearchData, handleChange, load, handleClick }) => {
   return (
     <div className="hotel-search">
       <h1>Search Hotels</h1>
       <h2>Enjoy Free Booking with DreamStay</h2>
-      <form className="search-box" onSubmit={handleSubmit}>
+      <form className="search-box">
         <div className="field">
           <label>Location</label>
           <input
@@ -54,8 +51,8 @@ const HotelSearch = ({ hotelSearchData, handleChange, handleClick, load }) => {
             onChange={(e) => handleChange("rooms", e.target.value)}
           />
         </div>
-        <button type="submit" disabled={load}>
-          {load ? "Loading..." : "Search"}
+        <button type="submit" disabled={load} onClick={handleClick}>
+          <Link to="/hotels">{load ? "Loading..." : "Search"}</Link>
         </button>
       </form>
     </div>

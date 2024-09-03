@@ -1,0 +1,10 @@
+.HotelDetails button{
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #ffffff; /* White background for the Sign Up button */
+  color: #ff9933; /* Saffron text color */
+  border: 2px solid #ff9933; /* Saffron border */
+}

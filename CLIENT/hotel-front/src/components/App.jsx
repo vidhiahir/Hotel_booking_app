@@ -7,6 +7,8 @@ import ShowHotels from "./ShowHotels.jsx";
 import axios from "axios";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import HotelDetails from "./HotelDetails.jsx";
+import ShowFilteredHotels from "./ShowFilteredHotels.jsx";
 
 const App = () => {
   axios.defaults.baseURL = "http://localhost:1712";
@@ -16,13 +18,10 @@ const App = () => {
     endDate: "",
     rooms: "1",
   });
-
   const [fetchHotels, setFetchHotels] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [result, setResult] = useState(false);
-  const [selectedHotel, setSelectedHotel] = useState();
-  // const [miniResult, setMiniResult] = useState(false);
+  const [selectedHotel, setSelectedHotel] = useState(null);
 
   function handleHotelSelect(hotel) {
     setSelectedHotel(hotel);
@@ -33,8 +32,8 @@ const App = () => {
       ...prevData,
       [name]: val,
     }));
-    setMiniResult(false);
   }
+
   const fetchAllHotels = () => {
     axios
       .get("/api/hotels")
@@ -48,8 +47,6 @@ const App = () => {
     setLoading(true);
     await fetchAllHotels();
     setLoading(false);
-    setResult(true);
-    // setMiniResult(true);
   }
 
   async function handleMiniButton() {
@@ -57,39 +54,41 @@ const App = () => {
     setLoading(true);
     await fetchAllHotels();
     setLoading(false);
-    // setMiniResult(true);
-    setSelectedHotel(null);
   }
 
   return (
     <Router>
       <Header />
       <Sidebar />
-
-      {result ? (
-        <>
-          <HotelSearchMini
-            miniData={hotelSearchData}
-            handleChange={handleChange}
-            handleClick={handleMiniButton}
-            load={loading}
-          />
-          <ShowHotels
-            hotelList={fetchHotels}
-            location={hotelSearchData.location}
-            hotel={selectedHotel}
-            handleSelection={handleHotelSelect}
-          />
-        </>
-      ) : (
-        <HotelSearch
-          hotelSearchData={hotelSearchData}
-          handleChange={handleChange}
-          handleClick={handleButton}
-          load={loading}
-          error={error}
+      <Routes>
+        <Route
+          path="/search"
+          element={
+            <HotelSearch
+              hotelSearchData={hotelSearchData}
+              handleChange={handleChange}
+              handleClick={handleButton}
+              load={loading}
+              error={error}
+            />
+          }
         />
-      )}
+        <Route
+          path="/hotels"
+          element={
+            <ShowFilteredHotels
+              hotelSearchData={hotelSearchData}
+              handleChange={handleChange}
+              handleMiniButton={handleMiniButton}
+              loading={loading}
+              fetchHotels={fetchHotels}
+              handleHotelSelect={handleHotelSelect}
+            />
+          }
+        />
+
+        <Route path="/hotels/:selectedHotel" element={<HotelDetails />} />
+      </Routes>
     </Router>
   );
 };

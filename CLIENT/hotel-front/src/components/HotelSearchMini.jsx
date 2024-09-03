@@ -28,7 +28,7 @@ const HotelSearchMini = ({ miniData, handleChange, handleClick, load }) => {
       <input
         type="date"
         value={miniData.endDate}
-        onChange={(e) => onChange("endDate", e.target.value)}
+        onChange={(e) => handleChange("endDate", e.target.value)}
         required
       />
       <input
